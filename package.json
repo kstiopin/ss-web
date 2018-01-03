@@ -1,0 +1,32 @@
+{
+  "name": "SmartSales-web",
+  "version": "0.1.0",
+  "description": "Smart Sales System",
+  "main": "index.html",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/smart-ideas/ss-web.git"
+  },
+  "keywords": [
+    "SmartIdeas",
+    "Sales"
+  ],
+  "author": "kstiopin",
+  "dependencies": {},
+  "devDependencies": {
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "babel-preset-react-app": "^3.1.0",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2",
+    "redux-saga": "^0.16.0",
+    "webpack": "^2.5.0"
+  },
+  "scripts": {
+    "start": "webpack-dev-server --progress --colors",
+    "build": "webpack",
+    "test": "test"
+  }
+}
