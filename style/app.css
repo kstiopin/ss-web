@@ -1,4 +1,11 @@
 /* General */
+body {
+    background-color: white;
+    background-image: url(./bg.jpg);
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
 h1,
 h2,
 h3 { margin-top: 0; }
