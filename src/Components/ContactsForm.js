@@ -26,10 +26,10 @@ class ContactsForm extends Component {
 
     return (
       <Dialog actions={ [<RaisedButton label='Сохранить' primary onClick={ this.handleContactsSave } />] } bodyClassName='contacts-form' modal onRequestClose={ close } open title='Контактная информация'>
-        <TextField defaultValue={ firstname } floatingLabelText='Имя' onChange={ value => this.setValue('firstname', value) } />
-        <TextField defaultValue={ lastname } floatingLabelText='Фамилия' onChange={ value => this.setValue('lastname', value) } />
-        <TextField defaultValue={ phone } floatingLabelText='Телефон' onChange={ value => this.setValue('phone', value) } />
-        <TextField defaultValue={ address } floatingLabelText='Адрес' onChange={ value => this.setValue('address', value) } />
+        <TextField defaultValue={ firstname } floatingLabelText='Имя' onChange={ (ev, value) => this.setValue('firstname', value) } />
+        <TextField defaultValue={ lastname } floatingLabelText='Фамилия' onChange={ (ev, value) => this.setValue('lastname', value) } />
+        <TextField defaultValue={ phone } floatingLabelText='Телефон' onChange={ (ev, value) => this.setValue('phone', value) } />
+        <TextField defaultValue={ address } floatingLabelText='Адрес' onChange={ (ev, value) => this.setValue('address', value) } />
       </Dialog>);
   }
 }

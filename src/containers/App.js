@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 // Actions
-import { getUserDetailsAction } from '../actions';
+import { getUserDetailsAction, userDetailsUpdateAction } from '../actions';
 // Components
 import Login from './Login';
 import ContactsForm from '../components/ContactsForm';
@@ -36,7 +36,9 @@ class App extends Component {
   toggleContacts = () => this.setState(prevState => ({ showContacts: !prevState.showContacts }))
 
   contactsSave = (details) => {
-    // save user details
+    const { dispatch } = this.props;
+    dispatch(userDetailsUpdateAction(details));
+    this.toggleContacts();
   }
 
   render () {

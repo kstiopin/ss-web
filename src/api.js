@@ -1,12 +1,9 @@
-import { API_URL, fetchHeaders } from '../config/config';
+import { API_URL, getHeaders, postHeaders } from '../config/config';
 
-export const emailLogin = (email, pass) => fetch(`${API_URL}/login.php`, {
-  body: `email=${encodeURIComponent(email)}&pass=${encodeURIComponent(pass)}`,
-  headers: {
-    'Accept': 'application/json',
-    'Content-Type': 'application/x-www-form-urlencoded',
-  },
-  method: 'POST',
-}).then(response => response.json());
+import { encodeURIParams } from './helpers';
 
-export const userDetails = (userId) => fetch(`${API_URL}/user_details.php?id=${userId}`, fetchHeaders).then(response => response.json());
+export const emailLogin = (email, pass) => fetch(`${API_URL}/login.php`, { ...postHeaders, body: encodeURIParams({ email, pass }) }).then(response => response.json());
+
+export const userDetails = (userId) => fetch(`${API_URL}/user_details.php?id=${userId}`, getHeaders).then(response => response.json());
+
+export const userDetailsUpdate = (details) => fetch(`${API_URL}/user_details_update.php`, { ...postHeaders, body: encodeURIParams(details) }).then(response => response.json());

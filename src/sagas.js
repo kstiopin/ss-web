@@ -2,7 +2,7 @@ import { call, put, takeEvery } from 'redux-saga/effects';
 
 import * as types from './constants';
 
-import { emailLogin, userDetails } from './api';
+import { emailLogin, userDetails, userDetailsUpdate } from './api';
 
 function* emailLoginSaga(action) {
   try {
@@ -26,14 +26,29 @@ function* userDetailsSaga(action) {
       yield put({ type: types.USER_DETAILS_FAILURE });
     }
   } catch (e) {
-    console.log('emailLoginSaga error', e.message);
+    console.log('userDetailsSaga error', e.message);
+  }
+}
+
+function* userDetailsUpdateSaga(action) {
+  try {
+    const { details } = action;
+    const resp = yield call(userDetailsUpdate, details);
+    if (resp) {
+      yield put({ type: types.USER_DETAILS_UPDATE_SUCCESS, details });
+    } else {
+      yield put({ type: types.USER_DETAILS_UPDATE_FAILURE });
+    }
+  } catch (e) {
+    console.log('userDetailsUpdateSaga error', e.message);
   }
 }
 
 function* mainSaga() {
   yield [
     takeEvery(types.EMAIL_LOGIN_REQUEST, emailLoginSaga),
-    takeEvery(types.USER_DETAILS_REQUEST, userDetailsSaga)
+    takeEvery(types.USER_DETAILS_REQUEST, userDetailsSaga),
+    takeEvery(types.USER_DETAILS_UPDATE_REQUEST, userDetailsUpdateSaga)
   ];
 }
 
