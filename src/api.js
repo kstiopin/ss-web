@@ -8,3 +8,5 @@ export const emailLogin = (email, pass) => fetch(`${API_URL}/login.php`, {
   },
   method: 'POST',
 }).then(response => response.json());
+
+export const userDetails = (userId) => fetch(`${API_URL}/user_details.php?id=${userId}`, fetchHeaders).then(response => response.json());

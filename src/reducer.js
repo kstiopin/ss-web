@@ -8,6 +8,8 @@ function mainReducer(state = initialState, action) {
     case types.EMAIL_LOGIN_SUCCESS:
       localStorage.setItem('user', JSON.stringify(action.user));
       return { ...state, user: action.user };
+    case types.USER_DETAILS_SUCCESS:
+      return { ...state, user: { ...state.user, ...action.details } };
     default:
       return state;
   }
