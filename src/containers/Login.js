@@ -4,7 +4,7 @@ import { Dialog, RaisedButton, TextField } from 'material-ui';
 
 import { validateEmail } from '../helpers';
 
-// import { emailLoginAction } from '../actions';
+import { emailLoginAction } from '../actions';
 
 import Login from './Login';
 
@@ -28,9 +28,8 @@ class App extends Component {
         if (!valid) {
           this.setState({ emailErrorText: 'Email is invalid!' });
         } else {
-          // handle auth
-          // const { dispatch } = this.props;
-          // dispatch(emailLoginAction(email, pass));
+          const { dispatch } = this.props;
+          dispatch(emailLoginAction(email, pass));
         }
       }
     }
