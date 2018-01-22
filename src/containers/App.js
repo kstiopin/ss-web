@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { AppBar, Avatar, FontIcon } from 'material-ui';
+import { AppBar, Avatar, FontIcon, List, ListItem, Paper } from 'material-ui';
 
 // Actions
 import { getUserDetailsAction, userDetailsUpdateAction } from '../actions';
@@ -61,6 +61,17 @@ class App extends Component {
             <Avatar icon={ <FontIcon className='material-icons'>person</FontIcon> } />
           </div> }
           title={ title } />
+        <div className='wrapper'>
+          <Paper className='left-menu'>
+            <List>
+              <ListItem primaryText='пункт меню 1' />
+              <ListItem initiallyOpen nestedItems={[ <ListItem primaryText='пункт меню 2.1' />, <ListItem primaryText='пункт меню 2.2' /> ]} primaryText='пункт меню 2' />
+              <ListItem primaryText='пункт меню 3' />
+              <ListItem nestedItems={[ <ListItem primaryText='пункт меню 4.1' /> ]} primaryText='пункт меню 4' />
+            </List>
+          </Paper>
+          <Paper className='content'>Content</Paper>
+        </div>
         { showContacts && <ContactsForm contactsSave={ this.contactsSave } close={ this.toggleContacts } user={ user } /> }
       </div>);
   }
