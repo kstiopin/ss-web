@@ -17,8 +17,8 @@ const store = createStore(mainReducer, applyMiddleware(sagaMiddleware));
 sagaMiddleware.run(mainSaga);
 
 ReactDOM.render(
-  <MuiThemeProvider>
-    <Provider store={ store }>
+  <Provider store={ store }>
+    <MuiThemeProvider>
       <App />
-    </Provider>
-  </MuiThemeProvider>, document.getElementById('app'));
+    </MuiThemeProvider>
+  </Provider>, document.getElementById('app'));

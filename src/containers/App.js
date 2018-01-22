@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { AppBar, Avatar, FontIcon } from 'material-ui';
 
 // Actions
 import { getUserDetailsAction, userDetailsUpdateAction } from '../actions';
@@ -50,10 +51,16 @@ class App extends Component {
       return null;
     }
     const { showContacts } = this.state;
+    const title = 'SmartSales';
 
     return (
       <div>
-        <h1>SmartSales</h1>
+        <AppBar
+          iconElementRight={ <div className='user-info'>
+            { user.firstname }&nbsp;{ user.lastname }
+            <Avatar icon={ <FontIcon className='material-icons'>person</FontIcon> } />
+          </div> }
+          title={ title } />
         { showContacts && <ContactsForm contactsSave={ this.contactsSave } close={ this.toggleContacts } user={ user } /> }
       </div>);
   }

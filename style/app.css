@@ -16,3 +16,14 @@ h3 { margin-top: 0; }
     flex-direction: column;
     max-height: inherit !important;
 }
+
+/* Top line */
+.user-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-top: 4px;
+}
+.user-info > div {
+    margin: 0 5px 0 10px;
+}
