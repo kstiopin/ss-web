@@ -44,30 +44,48 @@ class App extends Component {
 
   render () {
     const { user } = this.props;
-    console.log('App', 'RENDER', user);
     if (!user.hasOwnProperty('id')) {
       return (<Login />);
     } else if (!user.hasOwnProperty('firstname')) {
       return null;
     }
     const { showContacts } = this.state;
+    const { firstname, lastname, type } = user;
     const title = 'SmartSales';
+    const menuItems = [
+      { access: [1, 2, 3], title: 'личный профиль' },
+      { access: [1, 2], title: 'отдел продаж' },
+      { access: [1, 2], title: 'мои задачи' },
+      { access: [1, 2], title: 'события' },
+      { access: [1, 2, 3], title: 'база знаний' },
+      { access: [1, 2], title: 'структура компании' },
+      { access: [1, 2], title: 'настройки системы' },
+      { access: [1, 2, 3], title: 'файлы' },
+      { access: [1, 2, 3], title: 'документы' },
+      { access: [3], title: 'бизнес процессы' },
+      { access: [3], title: 'скрипты' },
+      { access: [3], title: 'FAQ' },
+    ].filter(menuItem => menuItem.access.indexOf(type * 1) > -1);
+    console.log('App', 'RENDER', user, menuItems);
 
     return (
       <div>
         <AppBar
           iconElementRight={ <div className='user-info'>
-            { user.firstname }&nbsp;{ user.lastname }
+            { firstname }&nbsp;{ lastname }
             <Avatar icon={ <FontIcon className='material-icons'>person</FontIcon> } />
           </div> }
           title={ title } />
         <div className='wrapper'>
           <Paper className='left-menu'>
             <List>
+              { menuItems.map((menuItem, index) => <ListItem key={ index } primaryText={ menuItem.title } />) }
+              { /* (type === '1') && <ListItem primaryText='настройки компании' />
+              <ListItem primaryText='пункт меню 1' />
               <ListItem primaryText='пункт меню 1' />
               <ListItem initiallyOpen nestedItems={[ <ListItem primaryText='пункт меню 2.1' />, <ListItem primaryText='пункт меню 2.2' /> ]} primaryText='пункт меню 2' />
               <ListItem primaryText='пункт меню 3' />
-              <ListItem nestedItems={[ <ListItem primaryText='пункт меню 4.1' /> ]} primaryText='пункт меню 4' />
+              <ListItem nestedItems={[ <ListItem primaryText='пункт меню 4.1' /> ]} primaryText='пункт меню 4' /> */ }
             </List>
           </Paper>
           <Paper className='content'>Content</Paper>
