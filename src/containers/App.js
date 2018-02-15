@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { AppBar, Avatar, FontIcon, List, ListItem, Paper } from 'material-ui';
 
@@ -69,7 +69,7 @@ class App extends Component {
     console.log('App', 'RENDER', user, menuItems);
 
     return (
-      <div>
+      <Fragment>
         <AppBar
           iconElementRight={ <div className='user-info'>
             { firstname }&nbsp;{ lastname }
@@ -91,7 +91,7 @@ class App extends Component {
           <Paper className='content'>Content</Paper>
         </div>
         { showContacts && <ContactsForm contactsSave={ this.contactsSave } close={ this.toggleContacts } user={ user } /> }
-      </div>);
+      </Fragment>);
   }
 }
 
