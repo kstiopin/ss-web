@@ -1,4 +1,6 @@
 import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { AppBar, Avatar, FontIcon, List, ListItem, Paper } from 'material-ui';
 
@@ -11,18 +13,11 @@ import ContactsForm from '../components/ContactsForm';
 class App extends Component {
   state = { showContacts: false }
 
-  componentWillMount() {
-    const { dispatch, user } = this.props;
-    if (user.hasOwnProperty('id') && (user.id > 0)) {
-      dispatch(getUserDetailsAction(user.id));
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const { dispatch, user } = nextProps;
-    if ((!this.props.user.hasOwnProperty('id') && user.hasOwnProperty('id')) || (this.props.user.id !== user.id)) {
-      dispatch(getUserDetailsAction(user.id));
-    } else if (user.hasOwnProperty('id') && user.hasOwnProperty('firstname') && !this.props.user.hasOwnProperty('firstname')) {
+  componentDidUpdate(prevProps) {
+    const { getUserDetailsAction, user } = this.props;
+    if ((!prevProps.user.hasOwnProperty('id') && user.hasOwnProperty('id')) || (prevProps.user.id !== user.id)) {
+      getUserDetailsAction(user.id);
+    } else if (user.hasOwnProperty('id') && user.hasOwnProperty('firstname') && !prevProps.user.hasOwnProperty('firstname')) {
       this.checkUserDetails(user);
     }
   }
@@ -37,14 +32,14 @@ class App extends Component {
   toggleContacts = () => this.setState(prevState => ({ showContacts: !prevState.showContacts }))
 
   contactsSave = (details) => {
-    const { dispatch } = this.props;
-    dispatch(userDetailsUpdateAction(details));
+    const { userDetailsUpdateAction } = this.props;
+    userDetailsUpdateAction(details);
     this.toggleContacts();
   }
 
   render () {
     const { user } = this.props;
-    if (!user.hasOwnProperty('id')) {
+    if (!user || !user.hasOwnProperty('id')) {
       return (<Login />);
     } else if (!user.hasOwnProperty('firstname')) {
       return null;
@@ -95,6 +90,13 @@ class App extends Component {
   }
 }
 
+App.propTypes = {
+  getUserDetailsAction: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired,
+  userDetailsUpdateAction: PropTypes.func.isRequired
+};
+
+const mapDispatchToProps = dispatch => bindActionCreators({ getUserDetailsAction, userDetailsUpdateAction }, dispatch);
 const mapStateToProps = ({ user }) => ({ user });
 
-export default connect(mapStateToProps)(App);
+export default connect(mapDispatchToProps, mapStateToProps)(App);
