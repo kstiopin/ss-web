@@ -16,6 +16,7 @@ class Login extends Component {
   setPass = (ev, pass) => this.setState({ pass, passErrorText: '' })
 
   handleAuth = () => {
+    const { sendEmailLoginAction } = this.props;
     const { email, pass } = this.state;
     if (pass.length === 0) {
       this.setState({ passErrorText: 'Password cannot be empty' });
@@ -24,12 +25,11 @@ class Login extends Component {
         this.setState({ emailErrorText: 'Email is required' });
       } else {
         const valid = validateEmail(email);
-        // console.log('Login', 'handleAuth', valid, email);
+        // console.log('Login', 'handleAuth', valid, email, pass);
         if (!valid) {
           this.setState({ emailErrorText: 'Email is invalid!' });
         } else {
-          const { emailLoginAction } = this.props;
-          emailLoginAction(email, pass);
+          sendEmailLoginAction(email, pass);
         }
       }
     }
@@ -47,10 +47,9 @@ class Login extends Component {
 }
 
 Login.propTypes = {
-  emailLoginAction: PropTypes.func.isRequired
+  sendEmailLoginAction: PropTypes.func.isRequired
 };
 
-const mapDispatchToProps = dispatch => bindActionCreators({ emailLoginAction }, dispatch);
-const mapStateToProps = () => ({});
+const mapDispatchToProps = dispatch => bindActionCreators({ sendEmailLoginAction: emailLoginAction }, dispatch);
 
-export default connect(mapDispatchToProps, mapStateToProps)(Login);
+export default connect(null, mapDispatchToProps)(Login);

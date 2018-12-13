@@ -96,7 +96,7 @@ App.propTypes = {
   userDetailsUpdateAction: PropTypes.func.isRequired
 };
 
-const mapDispatchToProps = dispatch => bindActionCreators({ getUserDetailsAction, userDetailsUpdateAction }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ getUserDetailsAction, userDetailsUpdateAction }, dispatch)
 const mapStateToProps = ({ user }) => ({ user });
 
-export default connect(mapDispatchToProps, mapStateToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

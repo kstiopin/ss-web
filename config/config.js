@@ -1,4 +1,4 @@
-export const API_URL = 'http://test.kstiopin.in.ua/api';
+export const API_URL = '/api';
 
 export const getHeaders = {
   headers: {
