@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 // Components
-import Login from './Login';
-import Dashboard from "./Dashboard";
+const Login = lazy(() => import('./Login'));
+const Dashboard = lazy(() => import('./Dashboard'));
 
-const App = ({ user }) => (!user || !user.hasOwnProperty('id')) ? <Login /> : <Dashboard />;
+const App = ({ user }) => (
+  <Suspense fallback={ () => 'Loading...' }>
+    { (!user || !user.hasOwnProperty('id')) ? <Login /> : <Dashboard /> }
+  </Suspense>);
 
 App.propTypes = {
   user: PropTypes.object.isRequired
