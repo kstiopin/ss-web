@@ -5,7 +5,7 @@
   "main": "index.html",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@bitbucket.org/smart-ideas/ss-web.git"
+    "url": "git+ssh://git@github.com:kstiopin/ss-web.git"
   },
   "keywords": [
     "SmartIdeas",
