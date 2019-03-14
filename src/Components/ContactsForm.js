@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { Dialog, RaisedButton, TextField } from 'material-ui';
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@material-ui/core';
 
 class ContactsForm extends Component {
+  state = { firstname: '', lastname: '', phone: '', address: '' };
+
   componentDidMount() {
     const { user } = this.props;
     const { firstname, lastname, phone, address } = user;
@@ -25,11 +27,17 @@ class ContactsForm extends Component {
     const { firstname, lastname, phone, address } = this.state;
 
     return (
-      <Dialog actions={ [<RaisedButton label='Сохранить' key='save' onClick={ this.handleContactsSave } primary />] } bodyClassName='contacts-form' modal onRequestClose={ close } open title='Контактная информация'>
-        <TextField defaultValue={ firstname } floatingLabelText='Имя' onChange={ (ev, value) => this.setValue('firstname', value) } />
-        <TextField defaultValue={ lastname } floatingLabelText='Фамилия' onChange={ (ev, value) => this.setValue('lastname', value) } />
-        <TextField defaultValue={ phone } floatingLabelText='Телефон' onChange={ (ev, value) => this.setValue('phone', value) } />
-        <TextField defaultValue={ address } floatingLabelText='Адрес' onChange={ (ev, value) => this.setValue('address', value) } />
+      <Dialog onClose={ close } open aria-labelledby='contacts-dialog-title'>
+        <DialogTitle id='contacts-dialog-title' onClose={ close }>Контактная информация</DialogTitle>
+        <DialogContent>
+          <TextField defaultValue={ firstname } floatingLabelText='Имя' onChange={ (ev, value) => this.setValue('firstname', value) } />
+          <TextField defaultValue={ lastname } floatingLabelText='Фамилия' onChange={ (ev, value) => this.setValue('lastname', value) } />
+          <TextField defaultValue={ phone } floatingLabelText='Телефон' onChange={ (ev, value) => this.setValue('phone', value) } />
+          <TextField defaultValue={ address } floatingLabelText='Адрес' onChange={ (ev, value) => this.setValue('address', value) } />
+        </DialogContent>
+        <DialogActions>
+          <Button label='Сохранить' key='save' onClick={ this.handleContactsSave } primary />
+        </DialogActions>
       </Dialog>);
   }
 }

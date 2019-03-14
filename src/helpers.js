@@ -9,5 +9,5 @@ export function encodeURIParams(obj) {
     params.push(`${encodeURIComponent(key)}=${encodeURIComponent(value)}`);
   });
 
-  return params.join("&");
+  return params.join('&');
 }

@@ -15,4 +15,4 @@ h3 { margin-top: 0; }
 .wrapper > div:first-child { margin-left: 0; }
 .wrapper > div.left-menu { flex: 1; }
 .wrapper > div.left-menu > div { width: 100%; }
-.wrapper > div.content { flex: 5; }
+.wrapper > div.content { flex: 5; padding: 10px; }

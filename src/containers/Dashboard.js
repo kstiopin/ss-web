@@ -2,8 +2,8 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { AppBar, Avatar, FontIcon, List, ListItem, Paper } from 'material-ui';
-
+import { AppBar, IconButton, List, ListItem, Paper, Toolbar, Typography } from '@material-ui/core';
+import { AccountCircle } from '@material-ui/icons';
 // Actions
 import { getUserDetailsAction, userDetailsUpdateAction } from '../actions';
 // Components
@@ -12,12 +12,19 @@ import ContactsForm from '../components/ContactsForm';
 class Dashboard extends Component {
   state = { showContacts: false }
 
+  componentDidMount() {
+    const { getUserDetailsAction, user } = this.props;
+    if (user.hasOwnProperty('id') && (user.id > 0)) {
+      getUserDetailsAction(user.id);
+    }
+  }
+
   componentDidUpdate(prevProps) {
     const { getUserDetailsAction, user } = this.props;
     if ((!prevProps.user.hasOwnProperty('id') && user.hasOwnProperty('id')) || (prevProps.user.id !== user.id)) {
       getUserDetailsAction(user.id);
-    } else if (user.hasOwnProperty('id') && user.hasOwnProperty('firstname') && !prevProps.user.hasOwnProperty('firstname')) {
-      this.checkUserDetails(user);
+    } else if (user.hasOwnProperty('id') && user.hasOwnProperty('firstname') && (!prevProps.user || !prevProps.user.hasOwnProperty('firstname'))) {
+      // this.checkUserDetails(user); // TODO: idea behind this was to show user form if some of user data is absent
     }
   }
 
@@ -36,7 +43,7 @@ class Dashboard extends Component {
     this.toggleContacts();
   }
 
-  render () {
+  render() {
     const { user } = this.props;
     const { showContacts } = this.state;
     const { firstname, lastname, type } = user;
@@ -55,20 +62,26 @@ class Dashboard extends Component {
       { access: [3], title: 'скрипты' },
       { access: [3], title: 'FAQ' },
     ].filter(menuItem => menuItem.access.indexOf(type * 1) > -1);
-    console.log('App', 'RENDER', user, menuItems);
+    console.log('Dashboard', 'RENDER', user, menuItems, this.state);
+    // TODO: 'user-info' should be placed to the right of the AppBar
 
     return (
       <Fragment>
-        <AppBar
-          iconElementRight={ <div className='user-info'>
-            { firstname }&nbsp;{ lastname }
-            <Avatar icon={ <FontIcon className='material-icons'>person</FontIcon> } />
-          </div> }
-          title={ title } />
+        <AppBar position='static'>
+          <Toolbar>
+            <Typography color='inherit' noWrap variant='h6'>{ title }</Typography>
+            <div className='user-info'>
+              { firstname }&nbsp;{ lastname }
+              <IconButton aria-haspopup='false' color='inherit'>
+                <AccountCircle />
+              </IconButton>
+            </div>
+          </Toolbar>
+        </AppBar>
         <div className='wrapper'>
           <Paper className='left-menu'>
             <List>
-              { menuItems.map((menuItem, index) => <ListItem key={ index } primaryText={ menuItem.title } />) }
+              { menuItems.map((menuItem, index) => <ListItem button key={ index }>{ menuItem.title }</ListItem>) }
               { /* (type === '1') && <ListItem primaryText='настройки компании' />
               <ListItem primaryText='пункт меню 1' />
               <ListItem primaryText='пункт меню 1' />

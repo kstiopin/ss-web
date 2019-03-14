@@ -1,12 +1,11 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
-
+import { all, call, put, takeEvery } from 'redux-saga/effects';
 import * as types from './constants';
-
 import { emailLogin, userDetails, userDetailsUpdate } from './api';
 
 function* emailLoginSaga(action) {
   try {
-    const user = yield call(emailLogin, action.email, action.pass);
+    const { email, pass } = action;
+    const user = yield call(emailLogin, email, pass);
     if (user && user.hasOwnProperty('id')) {
       yield put({ type: types.EMAIL_LOGIN_SUCCESS, user });
     } else {
@@ -45,11 +44,11 @@ function* userDetailsUpdateSaga(action) {
 }
 
 function* mainSaga() {
-  yield [
+  yield all([
     takeEvery(types.EMAIL_LOGIN_REQUEST, emailLoginSaga),
     takeEvery(types.USER_DETAILS_REQUEST, userDetailsSaga),
     takeEvery(types.USER_DETAILS_UPDATE_REQUEST, userDetailsUpdateSaga)
-  ];
+  ]);
 }
 
 export default mainSaga;
