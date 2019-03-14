@@ -1,0 +1,52 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaVersion": 6,
+    "ecmaFeatures": {
+      "jsx": true,
+      "modules": true
+    }
+  },
+  "plugins": [
+    "react"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ],
+  "rules": {
+    "array-bracket-spacing": 2,
+    "brace-style": 2,
+    "no-console": 1,
+    "no-trailing-spaces": 2,
+    "no-whitespace-before-property": 2,
+    "object-curly-spacing": ["error", "always"],
+    "quotes": [2, "single", { "avoidEscape": true }],
+    "react/display-name": 1,
+    "react/jsx-key": 1,
+    "react/jsx-tag-spacing": ["error", {
+      "closingSlash": "never",
+      "beforeSelfClosing": "always",
+      "afterOpening": "never",
+      "beforeClosing": "never"
+    }],
+    "space-before-blocks": 2,
+    "space-before-function-paren": ["error", "never"],
+    "space-in-parens": 2,
+    "space-infix-ops": ["error", { "int32Hint": true }]
+  },
+  "settings": {
+    "react": {
+      "pragma": "React",
+      "version": "16.8.4"
+    },
+    "propWrapperFunctions": [
+      "forbidExtraProps"
+    ]
+  }
+}

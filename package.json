@@ -30,40 +30,6 @@
     "redux-saga": "^0.16.2",
     "webpack": "^4.27.1"
   },
-  "eslintConfig": {
-    "env": {
-      "browser": true,
-      "es6": true
-    },
-    "parser": "babel-eslint",
-    "parserOptions": {
-      "sourceType": "module",
-      "ecmaVersion": 6,
-      "ecmaFeatures": {
-        "jsx": true,
-        "modules": true
-      }
-    },
-    "plugins": [
-      "react"
-    ],
-    "extends": [
-      "eslint:recommended",
-      "plugin:react/recommended"
-    ],
-    "rules": {
-      "no-console": 0
-    },
-    "settings": {
-      "react": {
-        "pragma": "React",
-        "version": "16.5.2"
-      },
-      "propWrapperFunctions": [
-        "forbidExtraProps"
-      ]
-    }
-  },
   "scripts": {
     "start": "webpack-dev-server --progress --colors",
     "build": "webpack",
