@@ -51,4 +51,5 @@ function* mainSaga() {
   ]);
 }
 
+// TODO: extract to folder and use a collector saga
 export default mainSaga;

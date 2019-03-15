@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import Login from './Login';
 import Dashboard from './Dashboard';
 
+// TODO: rework Dashboard to be a companies list available before Logging in
 const App = ({ user }) => ((!user || !user.hasOwnProperty('id')) ? <Login /> : <Dashboard />);
 
 App.propTypes = {

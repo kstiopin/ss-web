@@ -9,6 +9,7 @@ import { getUserDetailsAction, userDetailsUpdateAction } from '../actions';
 // Components
 import ContactsForm from '../components/ContactsForm';
 
+// TODO: rework Dashboard to be a companies list
 class Dashboard extends Component {
   state = { showContacts: false }
 

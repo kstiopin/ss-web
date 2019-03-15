@@ -1,6 +1,7 @@
 import { API_URL, getHeaders, postHeaders } from '../config/config';
 import { encodeURIParams } from './helpers';
 
+// TODO: rework withn an api factory
 /**
  * Login request using user's email
  * @param email {string}

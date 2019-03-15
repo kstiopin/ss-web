@@ -1,5 +1,6 @@
 export const API_URL = 'http://sales.kstiopin.in.ua/api';
 
+// TODO: move headers to api factory
 export const getHeaders = {
   headers: {
     'Accept': 'application/json',

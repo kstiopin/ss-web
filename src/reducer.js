@@ -18,4 +18,5 @@ function mainReducer(state = initialState, action) {
   }
 }
 
+// TODO: extract to folder
 export default mainReducer;
